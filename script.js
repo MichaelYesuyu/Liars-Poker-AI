@@ -1,3 +1,4 @@
+alert("i am sad man")
 
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
