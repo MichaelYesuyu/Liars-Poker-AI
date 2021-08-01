@@ -1,5 +1,3 @@
-alert("i am sad man")
-
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
 
@@ -10,6 +8,7 @@ var boardsTest = myFirebase.ref().child("boards_test");
 
 // Push our first recommendation to the end of the list and assign it a
 // unique ID automatically.
+
 boardsTest.push({
     "type":"test",
 });
