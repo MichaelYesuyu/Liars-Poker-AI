@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center"style="padding-top:20px;">
-                                <div class="col-lg-2 generateCard">
+                                <div class="col-lg-2" id="generateCard">
                                     
                                 </div>
                                 <div class="col-lg-2">
@@ -98,5 +98,13 @@
         firebase.analytics();
     </script>
     <script src="./script.js" crossorigin="anonymous"></script>
+    <script>
+    function generate(){
+    
+    document.getElementById('generateCard').innerHTML += 
+        
+    `<img src="assets/10C.jpg" class="img-fluid">`
+}
+    </script>
   </body>
 </html>
