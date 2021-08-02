@@ -12,3 +12,4 @@ var boardsTest = myFirebase.ref().child("boards_test");
 boardsTest.push({
     "type":"test",
 });
+
