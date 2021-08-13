@@ -1,0 +1,138 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peddie Book Exchange</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./login.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        //redirect functions below, use the window.locaiton.replace function to redirect the user
+        function redirectToHome() {
+            window.location.replace("https://exchange.peddie.org/index.html");
+        }
+        function redirectToLogin() {
+            window.location.replace("https://exchange.peddie.org/login.html");
+        }
+        /**
+         * This basically submits the registration data that the user enters to the backend and then dispalys the response, most things 
+         * don't have a response because we have bootstrap alerts but for a sucessful submission or one where the user already has an email or 
+         * has registered but not verified their email we send an alert.  
+         */
+        function sumbitRegistrationFunc() {
+            $.post("https://exchange.peddie.org/nodejs/register", {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+                passwordConfirm: $("#passwordConfirm").val(),
+            },
+                function (res) {
+                    if (res.message) {
+                        alert(res.message);
+                    }
+
+                    //do something w/ response maybe in the future if we want to show json e.g. maybe show an alert
+                });
+        }
+        $(document).ready(function () {
+            //calls funciton for sumbting data when the button for submitting data has been clicked
+            $('#submitRegistrationData').click(function () {
+                sumbitRegistrationFunc();
+            });
+        });
+    </script>
+</head>
+
+
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-5">
+            <a class="navbar-brand" href="#!">Liars Poker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="row">
+            <img class="picture" src="./BookExchangeImages/logo.png">
+        </div>
+
+
+        <div class="row">
+
+            <div class="card col-sm-8 col-md-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4 mt-1">Register</h4>
+                    <form
+                        oninput='passwordConfirm.setCustomValidity(password.value != passwordConfirm.value ? "Passwords do not match." : "")'
+                        onsubmit="event.preventDefault();">
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input id="firstName" name="fname" class="form-control" placeholder="First name"
+                                pattern="[A-Za-z]+" type="text" required title="Letters only">
+                        </div>
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input id="lastName" name="lname" class="form-control" placeholder="Last name"
+                                pattern="[A-Za-z]+" type="text" required title="Letters only">
+                        </div>
+                        <div class="form-group">
+                            <label>Your Peddie Email</label>
+                            <input id="email" name="email" class="form-control" placeholder="Email" type="email"
+                                pattern=".+@peddie.org" required title="must use Peddie email">
+                            <p class="smallfont">To ensure security, you must register with your Peddie email</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input id="password" name="password" class="form-control" placeholder="Password"
+                                type="password"
+                                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\x21-\x2F|\x3a-\x40|\x5B-\x60|\x7b-\x7e])[a-zA-Z0-9!@#$%^&*-_\x21-\x7e]{10,}$"
+                                required
+                                title="Your password must be atleast 10 characters and have at least a number and a lowercase, uppercase, and special character">
+                            <p class="smallfont">Your password must be atleast 10 characters and have atleast a number
+                                and a lowercase, uppercase,and special character.</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input id="passwordConfirm" name="passwordConfirm" class="form-control"
+                                placeholder="Confirm password" type="password" required>
+                            <p class="smallfont">Make sure your passwords match</p>
+                        </div>
+
+                        <div class="form-group">
+                            <button id="submitRegistrationData" class="btn btn-primary btn-block"> Register </button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-center links">
+                            Have an account? <a href="login.html" class="ml-2">Sign in</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+</body>
+
+</html>
