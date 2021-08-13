@@ -25,24 +25,17 @@
         }
         /**
          * This basically submits the registration data that the user enters to the backend and then dispalys the response, most things 
-         * don't have a response because we have bootstrap alerts but for a sucessful submission or one where the user already has an email or 
-         * has registered but not verified their email we send an alert.  
+         * don't have a response because we have bootstrap alerts but for a sucessful submission or one where the user already has an username or 
+         * has registered but not verified their username we send an alert.  
          */
         function sumbitRegistrationFunc() {
-            $.post("https://exchange.peddie.org/nodejs/register", {
-                firstName: $("#firstName").val(),
-                lastName: $("#lastName").val(),
-                email: $("#email").val(),
-                password: $("#password").val(),
-                passwordConfirm: $("#passwordConfirm").val(),
-            },
-                function (res) {
-                    if (res.message) {
-                        alert(res.message);
-                    }
+            username = $("#username").val()
+            password = $("#password").val()
+            passwordConfirm = $("#passwordConfirm").val()
+            if(password===passwordConfirm){
+                createUserWithUsernameAndPassword(username,password)
+            }
 
-                    //do something w/ response maybe in the future if we want to show json e.g. maybe show an alert
-                });
         }
         $(document).ready(function () {
             //calls funciton for sumbting data when the button for submitting data has been clicked
@@ -60,7 +53,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
             <a class="navbar-brand" href="#!">Liars Poker</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
@@ -70,7 +65,7 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="container">
         <div class="row">
             <img class="picture" src="./BookExchangeImages/logo.png">
@@ -85,31 +80,20 @@
                     <form
                         oninput='passwordConfirm.setCustomValidity(password.value != passwordConfirm.value ? "Passwords do not match." : "")'
                         onsubmit="event.preventDefault();">
+
                         <div class="form-group">
-                            <label>First name</label>
-                            <input id="firstName" name="fname" class="form-control" placeholder="First name"
-                                pattern="[A-Za-z]+" type="text" required title="Letters only">
-                        </div>
-                        <div class="form-group">
-                            <label>Last name</label>
-                            <input id="lastName" name="lname" class="form-control" placeholder="Last name"
-                                pattern="[A-Za-z]+" type="text" required title="Letters only">
-                        </div>
-                        <div class="form-group">
-                            <label>Your Peddie Email</label>
-                            <input id="email" name="email" class="form-control" placeholder="Email" type="email"
-                                pattern=".+@peddie.org" required title="must use Peddie email">
-                            <p class="smallfont">To ensure security, you must register with your Peddie email</p>
+                            <label>Your Username</label>
+                            <input id="username" name="username" class="form-control" placeholder="username"
+                                type="username">
+                            <p class="smallfont"></p>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input id="password" name="password" class="form-control" placeholder="Password"
-                                type="password"
-                                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\x21-\x2F|\x3a-\x40|\x5B-\x60|\x7b-\x7e])[a-zA-Z0-9!@#$%^&*-_\x21-\x7e]{10,}$"
-                                required
+                                type="password" pattern="^[0-9a-zA-Z]{10,}$" required
                                 title="Your password must be atleast 10 characters and have at least a number and a lowercase, uppercase, and special character">
-                            <p class="smallfont">Your password must be atleast 10 characters and have atleast a number
-                                and a lowercase, uppercase,and special character.</p>
+                            <p class="smallfont">Your password must be atleast 10 characters and can only have letters
+                                and numbers(makes it easier for us with the backend)</p>
                         </div>
                         <div class="form-group">
                             <label>Confirm Password</label>
@@ -131,7 +115,19 @@
 
             </div>
         </div>
-
+        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.8.1/firebase-database.min.js"
+            integrity="sha512-LqfoJG/+AW1xyxfd0WMJMx0w0lzrW686asRR6ezaa0hgvYUtyhqSlnWu1ZlvAuSxGxFsHZpeWdsl5+gJMFT31w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.8.1/firebase-auth.min.js"
+            integrity="sha512-GAEvFso2oksY5JFkHlrfLhZgAV6aL48qxnbxPnbKnNLeG/XsU/c0lh/g9gocZ2RtbRx6VDTqspPEy9ixWvbfzw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    
+        <script src="./script.js" crossorigin="anonymous"></script>
 
 </body>
 

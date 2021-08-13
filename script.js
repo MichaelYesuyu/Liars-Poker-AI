@@ -32,7 +32,10 @@ var password = "mypassword";
 
 function createUserWithUsernameAndPassword(username, password) {
   let email = username + '@email.com'
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(()=>{
+    console.log("sucessfully created user, signing in now")
+    loginUserWithUsernameAndPassword(username,password)
+  }).catch(function (error) {
     console.log(error.code);
     console.log(error.message);
     //alert("issue #1: Signup broke, dm Vijay or Michael")
@@ -41,6 +44,8 @@ function createUserWithUsernameAndPassword(username, password) {
 }
 
 function loginUserWithUsernameAndPassword(username, password) {
+  let email = username + '@email.com'
+
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
@@ -54,15 +59,25 @@ function loginUserWithUsernameAndPassword(username, password) {
       var errorMessage = error.message;
     });
 }
+
+function signOut(){
+  firebase.auth().signOut().then(function() {
+    console.log('Signed Out');
+  }, function(error) {
+    console.error('Sign Out Error', error);
+  });
+}
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     var uid = user.uid;
     // ...
-    console.log(uid)
+    console.log("user is signed in")
   } else {
     // User is signed out
     // ...
+    console.log("user is signed out")
   }
 })

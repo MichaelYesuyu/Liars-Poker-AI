@@ -12,6 +12,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -24,6 +25,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
                         <li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li>
+                        <li class="nav-item"><a class="nav-link" id ="signOut" href="#">Sign Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,6 +94,7 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
 
@@ -100,7 +103,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.8.1/firebase-database.min.js" integrity="sha512-LqfoJG/+AW1xyxfd0WMJMx0w0lzrW686asRR6ezaa0hgvYUtyhqSlnWu1ZlvAuSxGxFsHZpeWdsl5+gJMFT31w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.8.1/firebase-auth.min.js" integrity="sha512-GAEvFso2oksY5JFkHlrfLhZgAV6aL48qxnbxPnbKnNLeG/XsU/c0lh/g9gocZ2RtbRx6VDTqspPEy9ixWvbfzw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <script src="./script.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(()=>{
+            $('#signOut').click(()=>{
+                signOut()
+            });
+        });
+    </script>
   </body>
 </html>
