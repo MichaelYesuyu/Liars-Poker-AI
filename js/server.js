@@ -6,11 +6,13 @@ var port = process.env.PORT || 8000
 app.use(express.static('public'));
 
 app.get("/loadGame",function(req,res){
-  res.render("login")
+  res.writeHead(302,{Location: 'https://exchange.peddie.org/login.html'});
+  return res.end();
 });
 
 app.get("/",function(req,res){
-  res.render("index")
+  res.writeHead(302,{Location: 'https://exchange.peddie.org/login.html'});
+  return res.end();
 });
 
 // function initialzeApp(){
