@@ -3,14 +3,14 @@ var app = express();
 
 var port = process.env.PORT || 8000
 
-app.use(express.static(__dirname+"/public"));
-
-app.get("/",function(req,res){
-  res.render("index")
-});
+app.use(express.static('public'));
 
 app.get("/loadGame",function(req,res){
   res.render("login")
+});
+
+app.get("/",function(req,res){
+  res.render("index")
 });
 
 // function initialzeApp(){
