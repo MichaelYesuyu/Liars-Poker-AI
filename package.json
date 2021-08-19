@@ -4,8 +4,8 @@
   "description": "Liars Poker website for playing against friends and potentially an AI",
   "main": "script.js",
   "scripts": {
-    "test": "node ./js/test.js",
-    "start" : "node ./js/server.js"
+    "test": "node js/test.js",
+    "start" : "node js/server.js"
   },
   "repository": {
     "type": "git",
