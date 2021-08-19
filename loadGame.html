@@ -44,13 +44,13 @@
                             <p class="lead text-white-50 mb-4">Select mode below</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                                 
-                                <div class="form-group btn btn-outline-light noHover">
+                                <div id ="joinGame" class="form-group btn btn-outline-light noHover">
                                     <label style="color:white;">Join Game With Code: </label>
-                                    <input id="username" name="username" class="form-control" placeholder="username"
-                                        type="username">
+                                    <input id="gameCode" name="gameCode" class="form-control" placeholder="gameCode"
+                                        type="gameCode">
                                     <p class="smallfont"></p>
                                 </div>
-                                <a class="btn btn-outline-light btn-lg px-4">Create Game</a>
+                                <a id = "createGame" class="btn btn-outline-light btn-lg px-4">Create Game With Code</a>
                             </div>
                         </div>
                     </div>
@@ -97,10 +97,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.8.1/firebase-auth.min.js" integrity="sha512-GAEvFso2oksY5JFkHlrfLhZgAV6aL48qxnbxPnbKnNLeG/XsU/c0lh/g9gocZ2RtbRx6VDTqspPEy9ixWvbfzw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="./script.js" crossorigin="anonymous"></script>
+    <script src="./deck.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(()=>{
             $('#signOut').click(()=>{
                 signOut()
+            });
+            $('#joinGame').click(()=>{
+                gameCode = $('#gameCode').val()
+                joinGame(gameCode)
+            });
+            $('#createGame').click(()=>{
+                createGame()
             });
         });
     </script>

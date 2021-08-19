@@ -9,7 +9,14 @@ export default class Deck{
     get numberOfCards(){
         return this.cards.length
     }
-
+    get cards(){
+        let cardJSON = {}
+        for(let i = 0;i<this.numberOfCards;i++){
+            cardJSON.push(this.cards[i])
+        }
+        return cardJSON
+    }
+    
     //shuffles deck of cards
     shuffle(){
         for(let i = this.numberOfCards - 1; i>0; i--){

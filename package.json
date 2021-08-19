@@ -1,0 +1,29 @@
+{
+  "name": "liars-poker-ai",
+  "version": "1.0.0",
+  "description": "Liars Poker website for playing against friends and potentially an AI",
+  "main": "script.js",
+  "scripts": {
+    "test": "node ./js/test.js",
+    "start" : "node ./js/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelYesuyu/Liars-Poker-AI.git"
+  },
+  "keywords": [
+    "LiarsPoker",
+    "Liars",
+    "Poker"
+  ],
+  "author": "Vijay and Michael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelYesuyu/Liars-Poker-AI/issues"
+  },
+  "homepage": "https://github.com/MichaelYesuyu/Liars-Poker-AI#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^9.11.0"
+  }
+}

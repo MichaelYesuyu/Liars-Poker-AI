@@ -20,9 +20,7 @@ if (firebase.apps.length === 0) {
 }
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
-// Get a reference to the recommendations object of your Firebase.
-// Note: this doesn't exist yet. But when we write to our Firebase using
-// this reference, it will create this object for us!
+// we should probably create a boards and a boards_test database entry 
 var boardsTest = myFirebase.ref().child("boards_test");
 
 // Push our first recommendation to the end of the list and assign it a
@@ -30,11 +28,14 @@ var boardsTest = myFirebase.ref().child("boards_test");
 var email = "myemail@email.com";
 var password = "mypassword";
 
+var user = null; 
+
 function createUserWithUsernameAndPassword(username, password) {
   let email = username + '@email.com'
   firebase.auth().createUserWithEmailAndPassword(email, password).then(()=>{
     console.log("sucessfully created user, signing in now")
     loginUserWithUsernameAndPassword(username,password)
+    //switch location after this? 
   }).catch(function (error) {
     console.log(error.code);
     console.log(error.message);
@@ -49,7 +50,7 @@ function loginUserWithUsernameAndPassword(username, password) {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
-      var user = userCredential.user;
+      user = userCredential.user;
       console.log("hello")
       // ...
     })
@@ -81,3 +82,22 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log("user is signed out")
   }
 })
+
+function randomString(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+
+function joinGame(gameCode){
+  alert(`Game Code: ${gameCode}`)
+  
+}
+
+function newDeck(){
+
+}
+
+function createGame(){
+  alert('Creating Game')
+}
