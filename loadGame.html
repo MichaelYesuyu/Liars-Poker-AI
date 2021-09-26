@@ -105,12 +105,13 @@
             });
             $('#joinGame').click(()=>{
                 gameCode = $('#gameCode').val()
-                joinGame(gameCode)
+                joinGame(gameCode) //move this to node
             });
             $('#createGame').click(()=>{
-                createGame()
+                createGame() //move this to create game 
             });
         });
+        console.log(`${1+1}`)
     </script>
   </body>
 </html>

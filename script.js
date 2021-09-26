@@ -15,8 +15,10 @@ function initialzeApp(){
   firebase.analytics();
 }
 
+
 if (firebase.apps.length === 0) {
   initialzeApp()
+  var a = 0
 }
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
