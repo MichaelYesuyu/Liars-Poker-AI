@@ -19,6 +19,7 @@ function initialzeApp(){
 if (firebase.apps.length === 0) {
   initialzeApp()
   var a = 0
+  var b = 3
 }
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
