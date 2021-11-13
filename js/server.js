@@ -6,16 +6,32 @@ var app = express();
 var port = process.env.PORT || 8000
 
 app.use(express.static('public'));
-app.get("/test", function(req,res){
-  res.render("../indexTest.html")
+app.get('/test', function(req,res){
+  console.log("get request test was reached")
+  res.render("../indexTest")
 });
 app.get("/loadGame",function(req,res){
   res.writeHead(302,{Location: 'https://michaelyesuyu.github.io/Liars-Poker-AI/loadGame.html'});
   return res.end();
 });
 
-app.get("/",function(req,res){
-  res.writeHead(302,{Location: 'https://michaelyesuyu.github.io/Liars-Poker-AI/'});
+app.get('/testLoad', function(req,res) {
+  console.log("we are inside the test load redirect")
+  res.render("internal")
+});
+
+/***
+ * My logic here is that we should have the users in game ping the backend once every second or so to get game updates 
+ * a much more ideal way to set this up would be to setup some sort of web client but that is gonna take a lot of work so I'm
+ * just thinking that doing it the lazy way of asking for an update packet is better 
+ */
+app.get('/getGameUpdates',function(req, res){
+
+});
+
+app.get('/',function(req,res){
+  console.log("we are inside the general redirect")
+  res.render("indexTest")
   return res.end();
 });
 
