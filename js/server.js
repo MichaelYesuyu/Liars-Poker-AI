@@ -1,10 +1,14 @@
 var express = require('express');
+var bodyParser = require('body-parser')
+
 var app = express();
 
 var port = process.env.PORT || 8000
 
 app.use(express.static('public'));
-
+app.get("/test", function(req,res){
+  res.render("../indexTest.html")
+});
 app.get("/loadGame",function(req,res){
   res.writeHead(302,{Location: 'https://michaelyesuyu.github.io/Liars-Poker-AI/loadGame.html'});
   return res.end();
@@ -14,6 +18,8 @@ app.get("/",function(req,res){
   res.writeHead(302,{Location: 'https://michaelyesuyu.github.io/Liars-Poker-AI/'});
   return res.end();
 });
+
+var admin = require('firebase-admin');
 
 // function initialzeApp(){
 //     let firebaseConfig = {

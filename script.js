@@ -1,5 +1,5 @@
 
-function initialzeApp(){
+function initialzeApp() {
   let firebaseConfig = {
     apiKey: "AIzaSyDIguvH3NqDwhuNpO6CESQdv09t9qWQzlk",
     authDomain: "liarspoker-b0f12.firebaseapp.com",
@@ -31,13 +31,13 @@ var boardsTest = myFirebase.ref().child("boards_test");
 var email = "myemail@email.com";
 var password = "mypassword";
 
-var user = null; 
+var user = null;
 
 function createUserWithUsernameAndPassword(username, password) {
   let email = username + '@email.com'
-  firebase.auth().createUserWithEmailAndPassword(email, password).then(()=>{
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
     console.log("sucessfully created user, signing in now")
-    loginUserWithUsernameAndPassword(username,password)
+    loginUserWithUsernameAndPassword(username, password)
     //switch location after this? 
   }).catch(function (error) {
     console.log(error.code);
@@ -64,10 +64,10 @@ function loginUserWithUsernameAndPassword(username, password) {
     });
 }
 
-function signOut(){
-  firebase.auth().signOut().then(function() {
+function signOut() {
+  firebase.auth().signOut().then(function () {
     console.log('Signed Out');
-  }, function(error) {
+  }, function (error) {
     console.error('Sign Out Error', error);
   });
 }
@@ -92,15 +92,17 @@ function randomString(length, chars) {
   return result;
 }
 
-function joinGame(gameCode){
+/**
+ * This function is for the serverless implementation? The thing is do I just wnat to do the server based impl
+ * That will be tougher to set up for sure, but I think it will be worth it in the end because our end goal with this is to do some ai stuff
+ * @param gameCode user inputed code the identifies the game they want to join 
+ */
+function joinGame(gameCode) {
   alert(`Game Code: ${gameCode}`)
-  
 }
-
-function newDeck(){
-
+function newDeck() {
+  // do I do this here, also how do I want to store the deck? 
 }
-
-function createGame(){
+function createGame() {
   alert('Creating Game')
 }
