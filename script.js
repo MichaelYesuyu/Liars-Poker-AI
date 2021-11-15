@@ -25,6 +25,8 @@ if (firebase.apps.length === 0) {
 var myFirebase = firebase.database();
 // we should probably create a boards and a boards_test database entry 
 var boardsTest = myFirebase.ref().child("boards");
+console.log("we are here")
+console.log(boardsTest)
 
 // Push our first recommendation to the end of the list and assign it a
 // unique ID automatically.
