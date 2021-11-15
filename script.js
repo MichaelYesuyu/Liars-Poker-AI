@@ -24,7 +24,7 @@ if (firebase.apps.length === 0) {
 // Reference to your entire Firebase database
 var myFirebase = firebase.database();
 // we should probably create a boards and a boards_test database entry 
-var boardsTest = myFirebase.ref().child("boards");
+var boardsTest = myFirebase.ref().child("boards_test");
 console.log("we are here")
 console.log(boardsTest)
 
@@ -107,4 +107,7 @@ function newDeck() {
 }
 function createGame() {
   alert('Creating Game')
+  boardsTest.push({
+    "type":"test",
+  });
 }
