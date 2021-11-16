@@ -107,7 +107,15 @@ function newDeck() {
 }
 function createGame() {
   alert('Creating Game')
-  boardsTest.push({
-    "type":"test",
-  });
+  $.post("https://fast-falls-45520.herokuapp.com/createGame", 
+  // this is our body json that we send with post request
+  {
+    game_master: "uid",
+    start_hand_size: 2, 
+    max_hand_size : 7, 
+    max_num_players: 5, 
+    min_num_players: 2
+  }, function(res){
+    // do something with the response? 
+  }); 
 }
