@@ -35,16 +35,16 @@
         <header class="bg-dark py-5">
             <div class="container px-5">
                 <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <img src="assets/10D.jpg" class="img-fluid" alt="Responsive image">
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <img src="assets/10D.jpg" class="img-fluid" alt="Responsive image">
                     </div>
                     <div class="col-lg-6">
                         <div class="text-center my-5">
                             <div class="d-grid gap-1 d-sm-flex justify-content-sm-center">
-                                <img src="assets/pokerTableImage.jpg" class="img-fluid" alt="Responsive image">
+                                <img src="assets/pokerTable.jpg" class="img-fluid" alt="Responsive image">
                             </div>
                             <div class="row justify-content-center text-light col-lg-12">
                                 <div class="col-lg-6 text-center"style="padding-top:20px;">
@@ -56,8 +56,8 @@
                                 <div class="col-lg-2" id="generateCard">
                                     
                                 </div>
-                                <div class="col-lg-2">
-                                    <img src="assets/10C.jpg" class="img-fluid">
+                                <div class="col-lg-2" id="generateCard2">
+
                                 </div>
                             </div>
                         </div>
@@ -108,6 +108,10 @@
     function generate(){
     
     document.getElementById('generateCard').innerHTML += 
+        
+    `<img src="assets/10C.jpg" class="img-fluid">`
+
+    document.getElementById('generateCard2').innerHTML += 
         
     `<img src="assets/10C.jpg" class="img-fluid">`
 }
