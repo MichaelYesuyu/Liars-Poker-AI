@@ -65,7 +65,7 @@ function createToken() {
   console.log("token creation initialized")
   firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
     console.log("created token")
-    sendTokenToBackend(inputIdToken)
+    sendTokenToBackend(idToken)
     // Send token to your backend via HTTPS
     // ...
   }).catch(function (error) {
