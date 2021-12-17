@@ -50,6 +50,7 @@ function createUserWithUsernameAndPassword(username, password) {
 }
 
 function sendTokenToBackend(inputIdToken) {
+  console.log("backend send of token intialized")
   $.post("https://fast-falls-45520.herokuapp.com/loginWithToken",
     // this is our body json that we send with post request
     {
@@ -61,7 +62,9 @@ function sendTokenToBackend(inputIdToken) {
 }
 
 function createToken() {
+  console.log("token creation initialized")
   firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+    console.log("created token")
     sendTokenToBackend(inputIdToken)
     // Send token to your backend via HTTPS
     // ...
@@ -78,7 +81,7 @@ function loginUserWithUsernameAndPassword(username, password) {
     .then((userCredential) => {
       // Signed in
       user = userCredential.user;
-      console.log("hello")
+      console.log("the user has signed in, now we are creating the token")
       createToken()
       // ...
     })
