@@ -49,6 +49,26 @@ function createUserWithUsernameAndPassword(username, password) {
 
 }
 
+function sendTokenToBackend(inputIdToken) {
+  $.post("https://fast-falls-45520.herokuapp.com/loginWithToken",
+    // this is our body json that we send with post request
+    {
+      idToken : inputIdToken
+    }, function (res) {
+      // do something with the response if needed
+    });
+  
+}
+
+function createToken() {
+  firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+    // Send token to your backend via HTTPS
+    // ...
+  }).catch(function (error) {
+    // Handle error
+  });
+}
+
 function loginUserWithUsernameAndPassword(username, password) {
   let email = username + '@email.com'
 
@@ -56,7 +76,8 @@ function loginUserWithUsernameAndPassword(username, password) {
     .then((userCredential) => {
       // Signed in
       user = userCredential.user;
-      console.log("hello")
+      console.log("user signed in with user name and password sucessfully")
+      createToken() // generate an id token for our user
       // ...
     })
     .catch((error) => {
@@ -107,5 +128,5 @@ function newDeck() {
 }
 function createGame() {
   alert('Creating Game')
-   
+
 }
