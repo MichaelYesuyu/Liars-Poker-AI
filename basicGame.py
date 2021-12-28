@@ -78,9 +78,16 @@ def CheckThreeKind(cardPool, tripleCard):
     return False
 
 def CheckStraight(cardPool, highCard):
+    noDuplicateArray = ['placeholder','2','3','4','5','6','7','8','9','10','J','Q','K','A']
     orderList = ['A','2','3','4','5','6','7','8','9','10','J','Q','K','A']
-    topCard = orderList.index(highCard)
-    #need to figure this out, A2345 being allowed as a straight causes logic issues
+    topCard = noDuplicateArray.index(highCard)
+    valueList = []
+    for card in cardPool:
+        valueList.append(card.value)
+    for i in range(5):
+        if orderList[topCard-i] not in valueList:
+            return False
+    return True
 
 def CheckFlush(cardPool, highCard, suit):
     suitList = []
