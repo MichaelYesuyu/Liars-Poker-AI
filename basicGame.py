@@ -57,32 +57,59 @@ def CheckHigh(cardPool, highCard):
     return False
 
 def CheckPair(cardPool, pairCard):
-    return #TODO
+    valueList = []
+    for card in cardPool:
+        valueList.append(card.value)
+    if valueList.count(pairCard) >= 2:
+        return True
+    return False
 
 def CheckTwoPair(cardPool, pairCard1, pairCard2):
-    return #TODO
+    if CheckPair(cardPool,pairCard1) and CheckPair(cardPool,pairCard2):
+        return True
+    return False
 
 def CheckThreeKind(cardPool, tripleCard):
-    return #TODO
+    valueList = []
+    for card in cardPool:
+        valueList.append(card.value)
+    if valueList.count(tripleCard) >= 3:
+        return True
+    return False
 
 def CheckStraight(cardPool, highCard):
-    return #TODO
+    orderList = ['A','2','3','4','5','6','7','8','9','10','J','Q','K','A']
+    topCard = orderList.index(highCard)
+    #need to figure this out, A2345 being allowed as a straight causes logic issues
 
 def CheckFlush(cardPool, highCard, suit):
-    return #TODO
+    suitList = []
+    for card in cardPool:
+        suitList.append(card.suit)
+    if suitList.count(suit) >= 5 and CheckHigh(cardPool,highCard):
+        return True
+    return False
 
 def CheckFullHouse(cardPool, tripleCard, pairCard):
-    return #TODO
+    if CheckThreeKind(cardPool,tripleCard) and CheckPair(cardPool,pairCard):
+        return True
+    return False
 
 def CheckFourKind(cardPool, quadCard):
-    return #TODO
+    valueList = []
+    for card in cardPool:
+        valueList.append(card.value)
+    if valueList.count(quadCard) >= 4:
+        return True
+    return False
 
 def CheckStraightFlush(cardPool, highCard, suit):
-    return #TODO
+    if CheckStraight(cardPool,highCard) and CheckFlush(cardPool,highCard,suit):
+        return True
+    return False
 
 def CheckRoyalFlush(cardPool, suit):
     return CheckStraightFlush(cardPool,'A',suit)
-
 #end of check cards
 
 #supports up to 5 players, default is 2, returns the player that lost the round
@@ -155,8 +182,7 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
                         if CheckTwoPair(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2],store_move[3]):
                             return p
                         else:
-                            return store_move[0]
-                    
+                            return store_move[0]       
 
                     #use store_move to call one of the check functions, then update player cardnum
                     break
