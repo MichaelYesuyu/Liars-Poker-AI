@@ -1,4 +1,7 @@
-
+const local_host = "http://127.0.0.1:8000/"
+const website = "https://fast-falls-45520.herokuapp.com/"
+const use_local = false
+var request_header = (use_local) ? local_host : website
 function initialzeApp() {
   let firebaseConfig = {
     apiKey: "AIzaSyDIguvH3NqDwhuNpO6CESQdv09t9qWQzlk",
@@ -34,38 +37,68 @@ var email = "myemail@email.com";
 var password = "mypassword";
 
 var user = null;
-
+var session_token = randomString(32, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890')
 function createUserWithUsernameAndPassword(username, password) {
   let email = username + '@email.com'
   firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
     console.log("sucessfully created user, signing in now")
     loginUserWithUsernameAndPassword(username, password)
     //switch location after this? 
+    window.location.replace("https://michaelyesuyu.github.io/Liars-Poker-AI/index.html")
   }).catch(function (error) {
     console.log(error.code);
-    console.log(error.message);
+    alert(error.message);
     //alert("issue #1: Signup broke, dm Vijay or Michael")
   });
 
 }
+function cleanSession() {
+  createToken((idToken) => {
+    $.post(request_header + "cleanSession",
+      {
+        idToken : idToken
+      },
+      function (res) {
+        if (res.message) {
+          createToken((idToken) => {
+            sendTokenToBackend(idToken)
+          })
+        } else if (res.error) {
+          alert("an error occured signing you out of your session")
+        }
+      });
+  });
+}
 
 function sendTokenToBackend(inputIdToken) {
   console.log("backend send of token intialized")
-  $.post("https://fast-falls-45520.herokuapp.com/loginWithToken",
+
+  $.post(request_header + "loginWithToken",
     // this is our body json that we send with post request
     {
-      idToken: inputIdToken
-    }, function (res) {
-      // do something with the response if needed
+      idToken: inputIdToken,
+      session_token: session_token
+    },
+    function (res) {
+      console.log("we have recieved a response from sending the token to the backend")
+      console.log(`this is the response: ${res}`)
+      if (res.message == 'session still exists') {
+        $('#sessionModal').modal('show');
+        session_token = res.session_token // we set the session token to the response session token, and then if the user doesn't want to continue their session we just generate a new session token. 
+      } else if (res.message) {
+        alert(res.message);
+      }
+
     });
 
 }
 
-function createToken() {
+function createToken(_callback) {
   console.log("token creation initialized")
   firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
     console.log("created token")
-    sendTokenToBackend(idToken)
+    console.log(idToken)
+    _callback(idToken)
     // Send token to your backend via HTTPS
     // ...
   }).catch(function (error) {
@@ -82,7 +115,9 @@ function loginUserWithUsernameAndPassword(username, password) {
       // Signed in
       user = userCredential.user;
       console.log("the user has signed in, now we are creating the token")
-      createToken()
+      createToken((idToken) => {
+        sendTokenToBackend(idToken)
+      })
       // ...
     })
     .catch((error) => {
@@ -104,7 +139,6 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    var uid = user.uid;
     // ...
     console.log("user is signed in")
   } else {
