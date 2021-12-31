@@ -189,7 +189,42 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
                         if CheckTwoPair(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2],store_move[3]):
                             return p
                         else:
-                            return store_move[0]       
+                            return store_move[0]
+                    if store_move[1] == '5':
+                        if CheckThreeKind(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '6':
+                        if CheckStraight(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '7':
+                        if CheckFlush(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[3],store_move[2]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '8':
+                        if CheckFullHouse(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2],store_move[3]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '9':
+                        if CheckFourKind(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '10':
+                        if CheckStraightFlush(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2],store_move[3]):
+                            return p
+                        else:
+                            return store_move[0]
+                    if store_move[1] == '11':
+                        if CheckRoyalFlush(p1Cards+p2Cards+p3Cards+p4Cards+p5Cards,store_move[2]):
+                            return p
+                        else:
+                            return store_move[0]
 
                     #use store_move to call one of the check functions, then update player cardnum
                     break
@@ -237,3 +272,7 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
                 elif choice == '11':
                     choice2 = input('Enter suite of royal flush')
                     store_move = [p,choice,choice2]
+
+p1 = Player(2,[])
+p2 = Player(2,[])
+loser = gameRound(p1,p2)
