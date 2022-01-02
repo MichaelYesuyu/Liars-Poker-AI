@@ -119,18 +119,28 @@ def CheckRoyalFlush(cardPool, suit):
     return CheckStraightFlush(cardPool,'A',suit)
 #end of check cards
 
+#This function is for making sure that the last hand is smaller than the hand user wants to play
+def isHandLarger(previousHand,proposedHand):
+    
+    
+    return
+
 #supports up to 5 players, default is 2, returns the player that lost the round
 def gameRound(p1,p2,p3=None,p4=None,p5=None):
     #creates a fresh shuffled deck
     deck = Deck()
     deck.buildDeck()
     deck.shuffleDeck()
+    store_move = []
 
     #draws cards for each player
     p1Cards = deck.drawCards(p1.numCards)
     p1.cardList = p1Cards
     p2Cards = deck.drawCards(p2.numCards)
     p2.cardList = p2Cards
+    p3Cards = []
+    p4Cards = []
+    p5Cards = []
     if p3 is not None:
         p3Cards = deck.drawCards(p3.numCards)
         p3.cardList = p3Cards
@@ -142,11 +152,7 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
         p5.cardList = p5Cards
 
     #2 ways to end a round - call bluff or declare royal flush
-    callBluff = False
-    royalFlush = False
-
     while True:
-        store_move = []
         for p in [p1,p2,p3,p4,p5]:
             if p is not None:
                 print('Your move, choose:')
@@ -164,7 +170,7 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
                 
                 #makes sure user enters a valid response
                 while True:
-                    choice = input('Enter your choice')
+                    choice = input('Enter your choice: ')
                     if store_move != [] or choice != '1':
                         if choice in ['1','2','3','4','5','6','7','8','9','10','11']:
                             break
@@ -229,50 +235,56 @@ def gameRound(p1,p2,p3=None,p4=None,p5=None):
                     #use store_move to call one of the check functions, then update player cardnum
                     break
                 elif choice == '2':
-                    choice2 = input('Enter High card')
+                    choice2 = input('Enter High card: ')
                     store_move = [p,choice,choice2]
+                    print("You played: High card of " + choice2)
 
                 elif choice == '3':
-                    choice2 = input('Enter Pair card')
+                    choice2 = input('Enter Pair card: ')
                     store_move = [p,choice,choice2]
+                    print("You played: Pair of " + choice2 + "'s")
 
                 elif choice == '4':
-                    choice2 = input('Enter 1st pair card')
-                    choice3 = input('Enter 2nd pair card')
+                    choice2 = input('Enter 1st pair card: ')
+                    choice3 = input('Enter 2nd pair card: ')
                     store_move = [p,choice,choice2,choice3]
+                    print("You played: Two " + choice2 + "'s and two " + choice3 + "'s")
 
                 elif choice == '5':
-                    choice2 = input('Enter Triple card')
+                    choice2 = input('Enter Triple card: ')
                     store_move = [p,choice,choice2]
 
                 elif choice == '6':
-                    choice2 = input('Enter highest card in straight')
+                    choice2 = input('Enter highest card in straight: ')
                     #this one may need to prevent entering 2, 3, and 4
                     store_move = [p,choice,choice2]
 
                 elif choice == '7':
-                    choice2 = input('Enter flush suite')
-                    choice3 = input('Enter high card in flush')
+                    choice2 = input('Enter flush suite: ')
+                    choice3 = input('Enter high card in flush: ')
                     store_move = [p,choice,choice2,choice3]
 
                 elif choice == '8':
-                    choice2 = input('Enter triple card')
-                    choice3 = input('Enter pair card')
+
+                    choice2 = input('Enter triple card: ')
+                    choice3 = input('Enter pair card: ')
                     store_move = [p,choice,choice2,choice3]
 
                 elif choice == '9':
-                    choice2 = input('Enter quadruple card')
+                    choice2 = input('Enter quadruple card: ')
                     store_move = [p,choice,choice2]
 
                 elif choice == '10':
-                    choice2 = input('Enter high card in straight')
-                    choice3 = input('Enter suite of straight')
+                    choice2 = input('Enter high card in straight: ')
+                    choice3 = input('Enter suite of straight: ')
                     store_move = [p,choice,choice2,choice3]
 
                 elif choice == '11':
-                    choice2 = input('Enter suite of royal flush')
+                    choice2 = input('Enter suite of royal flush: ')
                     store_move = [p,choice,choice2]
+                    break
 
 p1 = Player(2,[])
 p2 = Player(2,[])
 loser = gameRound(p1,p2)
+print(loser)
